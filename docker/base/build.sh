@@ -256,7 +256,7 @@ for TARGET in $TARGETS; do
       if [[ "$USEMODULES" == false ]]; then
         CC=arm-linux-gnueabihf-gcc-6 CXX=arm-linux-gnueabihf-g++-6 GOOS=linux GOARCH=arm GOARM=7 CGO_ENABLED=1 CGO_CFLAGS="-march=armv7-a -fPIC" CGO_CXXFLAGS="-march=armv7-a -fPIC" go get $V $X "${T[@]}" --ldflags="$V $LD" -d $PACK_RELPATH
       fi
-      CC=arm-linux-gnueabihf-gcc-6 CXX=arm-linux-gnueabihf-g++-6 GOOS=linux GOARCH=arm GOARM=7 CGO_ENABLED=1 CGO_CFLAGS="-march=armv7-a -fPIC" CGO_CXXFLAGS="-march=armv7-a -fPIC" go build $V $X $MOD "${T[@]}" --ldflags="$V $LD" $BM -o "/build/$NAME-linux-arm-7`extension linux`" $PACK_RELPATH
+      CC=arm-linux-gnueabihf-gcc-6 CXX=arm-linux-gnueabihf-g++-6 GOOS=linux GOARCH=arm GOARM=7 CGO_ENABLED=1 CGO_CFLAGS="-march=armv7-a -fPIC" CGO_CXXFLAGS="-march=armv7-a -fPIC" go build $V $X $MOD "${T[@]}" -gcflags=all="-N -l" --ldflags="$V $LD" $BM -o "/build/$NAME-linux-arm-7`extension linux`" $PACK_RELPATH
 
       echo "Cleaning up Go runtime for linux/arm-7..."
       rm -rf /usr/local/go/pkg/linux_arm
